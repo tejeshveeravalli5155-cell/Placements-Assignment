@@ -2,29 +2,6 @@ import java.math.BigInteger;
 import java.nio.file.*;
 import java.util.*;
 
-/**
- * Placements assignment - "Shamir's Secret Sharing" style problem.
- *
- * Each test case gives n roots of a polynomial of degree (k-1), where the
- * y-value of every root is encoded in an arbitrary numeric base. We need to
- * recover the constant term c = f(0) of the polynomial.
- *
- * Because n can be greater than k, some of the given points may be corrupted
- * (this is verified below for test case 2, where 2 of the 10 points are
- * inconsistent with the rest). Simply taking the first k points is therefore
- * not reliable, so this program:
- *   1. Decodes every (x, y) pair from its given base into a BigInteger.
- *   2. Tries every combination of k points out of n and, for each, computes
- *      f(0) exactly via Lagrange interpolation using exact fraction
- *      (BigInteger numerator/denominator) arithmetic - no floating point.
- *   3. Reports the value that the largest number of subsets agree on as the
- *      true constant term c, and reports which original points never took
- *      part in an "agreeing" subset (i.e. the corrupted shares).
- *
- * Only java.util / java.math / java.io are used (no external JSON library) -
- * a tiny hand-rolled JSON parser is included since only objects/strings/
- * numbers appear in this input format.
- */
 public class Final {
 
     // ---------------- exact rational arithmetic ----------------
